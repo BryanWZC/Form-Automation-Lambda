@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  form_automation
+
+  SAM Template for form_automation
+
+Globals:
+  Function:
+    Timeout: 300
+
+Resources:
+  FormAutomationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: form_automation/
+      Handler: app.lambda_handler
+      Runtime: python3.6
+      MemorySize: 1024
+      Environment:
+        Variables:
+          MODE: "DEV" # Dev or PROD
+          FORM_URL: "ENTER_URL_HERE"
+          CAPTCHA_URL_1: "http://2captcha.com/in.php"
+          CAPTCHA_API_KEY: "ENTER_CAPTCHA_API_KEY_HERE"
+
+
+Outputs:
+  FormAutomationFunction:
+    Description: "Automates submission of google form"
+    Value: !GetAtt FormAutomationFunction.Arn
+  FormAutomationFunctionIamRole:
+    Description: "Implicit IAM Role created for Form Automation function"
+    Value: !GetAtt FormAutomationFunctionRole.Arn
