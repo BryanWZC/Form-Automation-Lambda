@@ -95,7 +95,6 @@ def auto_fill_form(i):
                 js = f'document.getElementById("g-recaptcha-response").innerHTML="{req_captcha}"'
                 driver.execute_script(js)
                 status = 1
-                print('RECAPTCHA: ' + req_captcha)
     except Exception as e:
         print(e)
 
